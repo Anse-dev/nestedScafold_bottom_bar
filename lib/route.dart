@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:test_d/scaffold_nested_navigation.dart';
+import 'package:test_d/screens/compteur.dart';
+import 'package:test_d/screens/compteur_2.dart';
 import 'package:test_d/screens/details_screen.dart';
-import 'package:test_d/screens/exampel_counter.dart';
+import 'package:test_d/screens/first_screen.dart';
 import 'package:test_d/screens/home_screen.dart';
 import 'package:test_d/screens/message_screen.dart';
 import 'package:test_d/screens/publier_screen.dart';
+import 'package:test_d/screens/secondary.dart';
 import 'package:test_d/screens/trajet_screen.dart';
 
 // private navigators
@@ -25,17 +28,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     debugLogDiagnostics: true,
     navigatorKey: _rootNavigatorKey,
     redirect: (context, state) async {
-      final path = state.uri.path;
       return null;
     },
     //refreshListenable: GoRouterRefreshStream(authRepository.authStateChanges()),
     routes: [
       // splash
-      GoRoute(
-        path: '/counter',
-        name: 'details_2',
-        builder: (context, state) => const ExampleCounter(label: 'B'),
-      ),
+
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           // the UI shell
@@ -54,8 +52,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 pageBuilder: (context, state) => const NoTransitionPage(
                   child: HomeScreen(),
                 ),
-                routes: const [
-                  // child route
+                routes: [
+                  GoRoute(
+                    path: 'first',
+                    name: 'first',
+                    builder: (context, state) => const FirstScreen(),
+                  ),
                 ],
               ),
             ],
@@ -73,9 +75,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 routes: [
                   // child route
                   GoRoute(
-                    path: 'details',
-                    builder: (context, state) =>
-                        const DetailsScreen(label: 'B'),
+                    path: 'second',
+                    name: 'second',
+                    builder: (context, state) => const SecondScreen(),
                   ),
                 ],
               ),
@@ -88,7 +90,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/vos-trajets',
                 pageBuilder: (context, state) => const NoTransitionPage(
-                  child: TrajetPage(),
+                  child: CompteurScreen(),
                 ),
                 routes: [
                   // child route
@@ -113,10 +115,9 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 routes: [
                   // child route
                   GoRoute(
-                    path: 'details',
-                    name: 'details_name',
-                    builder: (context, state) =>
-                        const DetailsScreen(label: 'B'),
+                    path: 'advance',
+                    name: 'advance',
+                    builder: (context, state) => const AdvancedCounterScreen(),
                   ),
                 ],
               ),

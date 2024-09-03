@@ -13,9 +13,9 @@ class HomeScreen extends StatelessWidget {
           const Center(
             child: Text(' Home Screen'),
           ),
-          ElevatedButton(
-            onPressed: () => context.pushNamed('details_2'),
-            child: const Text('Go to Details 2'),
+          TextButton(
+            onPressed: () => context.pushNamed('first'),
+            child: const Text('go to first screen'),
           )
         ],
       ),

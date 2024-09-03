@@ -15,6 +15,11 @@ class MessagesPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(label),
+            TextButton(
+                onPressed: () {
+                  context.pushNamed('advance');
+                },
+                child: const Text('advance screen'))
           ],
         ),
       ),
